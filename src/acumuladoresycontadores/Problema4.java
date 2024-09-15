@@ -29,8 +29,8 @@ public class Problema4 extends JFrame implements ActionListener{
 	private JTextArea txtAreaResultado;
 	
 	//variables globales
-	int tipo0, tipo1, tipo2, tipo3;
-	int cant0, cant1, cant2, cant3;
+	int cantVehi0, cantVehi1, cantVehi2, cantVehi3, cantVehi4;
+	int cantPsj0, cantPsj1, cantPsj2, cantPsj3, cantPsj4;
 
 	/**
 	 * Launch the application.
@@ -64,17 +64,17 @@ public class Problema4 extends JFrame implements ActionListener{
 		contentPane.add(lblNewLabel);
 		
 		lblNewLabel_1 = new JLabel("Cantidad de pasajeros");
-		lblNewLabel_1.setBounds(10, 36, 123, 14);
+		lblNewLabel_1.setBounds(10, 36, 143, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		txtCantidad = new JTextField();
-		txtCantidad.setBounds(127, 33, 86, 20);
+		txtCantidad.setBounds(163, 33, 86, 20);
 		contentPane.add(txtCantidad);
 		txtCantidad.setColumns(10);
 		
 		cmbTipo = new JComboBox();
 		cmbTipo.setModel(new DefaultComboBoxModel(new String[] {"autom\u00F3vil", "cami\u00F3n", "caminoneta", "omnib\u00FAs", "otros"}));
-		cmbTipo.setBounds(127, 7, 86, 22);
+		cmbTipo.setBounds(163, 7, 86, 22);
 		contentPane.add(cmbTipo);
 		
 		btnProcesar = new JButton("Procesar");
@@ -108,6 +108,10 @@ public class Problema4 extends JFrame implements ActionListener{
 		tipo = getTipo();
 		cantidad = getCantidad();
 		
+		//Proceso de calculo
+		efectuarIncrementos(tipo, cantidad);
+		mostrarResultados();
+		
 	}
 	public void actionPerformedBtnBorrar(ActionEvent e) {
 		txtCantidad.setText("");
@@ -118,7 +122,47 @@ public class Problema4 extends JFrame implements ActionListener{
 		return cmbTipo.getSelectedIndex();
 	}
 	int getCantidad() {
-		return txtCantidad.getText();
+		return Integer.parseInt(txtCantidad.getText());
+	}
+	void efectuarIncrementos(int tipo, int cantidad) {
+		switch(tipo) {
+			case 0:
+				cantVehi0++;
+				cantPsj0 += cantidad;
+				break;
+			case 1:
+				cantVehi1++;
+				cantPsj1 += cantidad;
+				break;
+			case 2:
+				cantVehi2++;
+				cantPsj2 += cantidad;
+				break;
+			case 3:
+				cantVehi3++;
+				cantPsj3 += cantidad;
+				break;
+			default:
+				cantVehi4++;
+				cantPsj4 += cantidad;
+				break;
+		}
+	}
+	void mostrarResultados() {
+		txtAreaResultado.setText("\n"); 
+		txtAreaResultado.append("Cantidad total de vehículos" + "\n"); 
+		txtAreaResultado.append("- Automóviles  : " + cantVehi0 + "\n"); 
+		txtAreaResultado.append("- Camiones     : " + cantVehi1 + "\n"); 
+		txtAreaResultado.append("- Camionetas   : " + cantVehi2 + "\n"); 
+		txtAreaResultado.append("- Omnibuses    : " + cantVehi3 + "\n"); 
+		txtAreaResultado.append("- Otros        : " + cantVehi4 + "\n"); 
+		txtAreaResultado.append("\n"); 
+		txtAreaResultado.append("Cantidad total de pasajeros" + "\n"); 
+		txtAreaResultado.append("- Automóviles  : " + cantPsj0 + "\n"); 
+		txtAreaResultado.append("- Camiones     : " + cantPsj1 + "\n"); 
+		txtAreaResultado.append("- Camionetas   : " + cantPsj2 + "\n"); 
+		txtAreaResultado.append("- Omnibuses    : " + cantPsj3 + "\n"); 
+		txtAreaResultado.append("- Otros        : " + cantPsj4 + "\n");
 	}
 	
 }
